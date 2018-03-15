@@ -1,0 +1,46 @@
+[package]
+name = "greeter_example"
+version = "0.1.0"
+authors = ["Lemures <martinsmith3d.art@gmail.com>"]
+readme = "README.md"
+
+[workspace]
+members = ["proto"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[dependencies]
+ferris_print = "0.1"
+grpcio-sys = "0.2.0"
+grpcio = "0.2.0"
+libc = "0.2"
+futures = "^0.1.15"
+protobuf = { version = "1.2", optional = true }
+log = "0.3"
+grpcio-proto = { path = "proto", version = "*" }
+serde_json = "1.0"
+serde = "1.0"
+serde_derive = "1.0"
+rand = "0.3"
+slog = "2.0"
+slog-async = "2.1"
+slog-stdlog = "3.0"
+slog-scope = "4.0"
+slog-term = "2.2"
+
+[features]
+default = ["protobuf-codec"]
+protobuf-codec = ["protobuf"]
+secure = ["grpcio-sys/secure"]
+
+[[bin]]
+name = "greeter_client"
+path = "src/client/client.rs"
+
+[[bin]]
+name = "greeter_server"
+path = "src/server/server.rs"
+
+[profile.release]
+debug = true
